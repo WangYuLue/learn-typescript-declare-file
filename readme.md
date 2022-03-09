@@ -26,7 +26,7 @@ declare module 'block' {
 
 这是因为 ts编译器 模块加载到 `index.ts` 时，会自动排除 `index.d.ts` 和 `index.js` 这样的文件，导致 `index.d.ts` 实际上没有被加载。
 
-解决方式是给 `.ts` 文件和 `.d.ts` 命名不同的文件名，例如，将 `index.d.ts` 改名为 `global.d.ts`，参考 `demo-01-fix`。
+解决方式是给 `.ts` 文件和 `.d.ts` 命名不同的文件名，例如，将 `index.d.ts` 改名为 `global.d.ts`(参考 `demo-01-fix`)。
 
 ## 场景二：导入图片类型不生效
 
@@ -108,7 +108,19 @@ interface Window {
 window.helloWorld = () => console.log('hello world');
 ```
 
-这里的 `global.d.ts` 改成 `global.ts` 也可以生效，参考 `demo-06.1`；
+这里的 `global.d.ts` 改成 `global.ts` 也可以生效(参考 `demo-06.1`);
+
+或者可以在文件模块中使用 `declare global`，如下(参考 `demo-06.2`):
+
+```ts
+declare global {
+  interface Window {
+    helloWorld(): void;
+  }
+}
+
+window.helloWorld = () => console.log('hello world');
+```
 
 ## 参考链接
 
