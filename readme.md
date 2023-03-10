@@ -8,12 +8,12 @@
 
 ```ts
 // index.ts
-import block from 'block';
+import block from "block";
 
 block.name;
 
 // index.d.ts
-declare module 'block' {
+declare module "block" {
   export var name: string;
 }
 ```
@@ -24,7 +24,7 @@ declare module 'block' {
 
 这是因为 `index.ts` 和 `index.d.ts` 文件名相同，仅仅是后缀不同，一个是 `.ts`，一个是 `.d.ts`。
 
-这是因为 ts编译器 模块加载到 `index.ts` 时，会自动排除 `index.d.ts` 和 `index.js` 这样的文件，导致 `index.d.ts` 实际上没有被加载。
+这是因为 ts 编译器 模块加载到 `index.ts` 时，会自动排除 `index.d.ts` 和 `index.js` 这样的文件，导致 `index.d.ts` 实际上没有被加载。
 
 解决方式是给 `.ts` 文件和 `.d.ts` 命名不同的文件名，例如，将 `index.d.ts` 改名为 `global.d.ts`(参考 `demo-01-fix`)。
 
@@ -35,23 +35,23 @@ declare module 'block' {
 可以在申明文件中加上：
 
 ```ts
-declare module '*.png';
+declare module "*.png";
 ```
 
 参考 `demo-02-fix`
 
 ## 场景三：申明文件根部有 `import` 或者 `export` 关键字后，申明文件就会变成局部的
 
-参考 `demo-03`，`demo-03` 复制于 `demo-01-fix`，当申明文件的根本有 `import` 或者 `export` 关键字后，申明文件就会变成局部的，导致 `index.ts` 中报错提示无法找到相应模块。
+参考 `demo-03`，`demo-03` 复制于 `demo-01-fix`，当申明文件的根部有 `import` 或者 `export` 关键字后，申明文件就会变成局部的，导致 `index.ts` 中报错提示无法找到相应模块。
 
 ```ts
 // index.ts
-import block from 'block';
+import block from "block";
 
 block.name;
 
 // index.d.ts
-declare module 'block' {
+declare module "block" {
   export var name: string;
 }
 
@@ -66,13 +66,13 @@ export var age: number;
 
 ```js
 // index.js
-Array.prototype.getSum = function(){    
-  return this.reduce((result, value) => result + value, 0); 
+Array.prototype.getSum = function(){
+  return this.reduce((result, value) => result + value, 0);
 }
 
 // global.d.ts
-interface Array<T> {   
-  getSum(): T extends number ? number : void; 
+interface Array<T> {
+  getSum(): T extends number ? number : void;
 }
 ```
 
@@ -105,7 +105,7 @@ interface Window {
 }
 
 // index.ts
-window.helloWorld = () => console.log('hello world');
+window.helloWorld = () => console.log("hello world");
 ```
 
 这里的 `global.d.ts` 改成 `global.ts` 也可以生效(参考 `demo-06.1`);
@@ -119,7 +119,7 @@ declare global {
   }
 }
 
-window.helloWorld = () => console.log('hello world');
+window.helloWorld = () => console.log("hello world");
 ```
 
 ## 参考链接
